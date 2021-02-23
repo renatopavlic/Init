@@ -5,3 +5,7 @@
   background-color: #000;
   height: 10vh;
 }
+
+.nav__logo {
+  margin-left: 40px;
+}

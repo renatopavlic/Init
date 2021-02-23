@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import './App.css';
-import LoginForm from "./components/LoginForm/LoginForm";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Nav from "./components/Nav/Nav";
+import { UserProvider } from "./context/UserContext";
+import { UserContext } from "./context/UserContext";
 
 function App() {
+
   return (
     <div className="app">
-      <Nav />
-      <LoginForm />
+      <Router>
+        <UserProvider>
+          <Nav />
+          <Switch>
+              <Route path="/profile">
+                <ProfilePage />
+              </Route>
+              <Route path="/">
+                <LoginPage />
+              </Route>
+            </Switch>
+        </UserProvider>
+    </Router>
     </div>
   );
 }
