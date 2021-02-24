@@ -36,12 +36,10 @@ function Profile() {
       // Return To Login
       history.push("/");
     } else {
-      // User Logged In!
+      // Token OK
       console.log("user ok")
     };
   }, [user])
-
-  console.log("user is", user)
 
   return (
     <div>
