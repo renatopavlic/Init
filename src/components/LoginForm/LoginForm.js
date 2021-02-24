@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import "./LoginForm.css";
 
-function LoginForm() {
-
-  // const [email, setEmail] = useState("");
+const LoginForm = props => {
+  
+  // Form inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,8 +13,9 @@ function LoginForm() {
         <h1>Login</h1>
         <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" required/>
         <input onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password" required/>
-        <button type="submit">Login</button>
+        <p id="loginForm__errorMsg">{props.error && `* ${props.error}`}</p>
       </form>
+      <button className="loginForm__button" onClick={(e)=>{props.login(email, password)}}>Login</button>
     </div>
   )
 }

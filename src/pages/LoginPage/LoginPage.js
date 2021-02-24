@@ -1,59 +1,47 @@
-import React, { useEffect, useContext } from 'react';
-import { UserContext } from "../../context/UserContext";
+import React, { useContext, useState } from 'react';
 import "./LoginPage.css";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import { UserContext } from "../../context/UserContext";
+import authService from "../../services/auth.service";
+import { useHistory } from "react-router-dom";
 
 function LoginPage() {
 
+  // History Hook
+  const history = useHistory();
+  // User Context
   const { user, setUser } = useContext(UserContext);
+  // Error
+  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    // User Authentication Function
-    const authUser = async () => {
 
-      const data =  { "username": "john@doe.com", "password": "test123" };
-    
-      try {
-        const rawResponse = await fetch("https://api.getcountapp.com/api/v1/authenticate", {
-          method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache', 
-          credentials: 'same-origin', 
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          redirect: 'follow',
-          referrerPolicy: 'no-referrer',
-          body: JSON.stringify(data)
-        });
-    
-      const response = await rawResponse.json();
-    
-      console.log("tražim", response.token);
+  // Login Function
+  const login = (user, pass) => {
+    authService.login(user, pass)
+    .then(handleResponse)
+    .catch(e => {
+      setError("Error!");
+      console.error(e);
+    })
+  }
 
-      // Save Data 
-      setUser({
-        token: response.token,
-        user: response.user
-      })
-
-      return response;
-    
-      } 
-      // Catch error
-      catch (error) {
-        alert(error.message)
-      }
-    };
-
-    authUser();
-  }, [])
+  // Handle Response
+  const handleResponse = (data) => {
+    if(data.errorMessage){
+      // Set Error Message
+      setError(data.errorMessage);
+    } else {
+      // Logged in
+      setUser(data);
+      history.push("/profile")
+    }
+  }
 
   return (
     <div className="loginPage">
-      <LoginForm />
+      <LoginForm login={login} error={error}/>
     </div>
   )
 }
 
-export default LoginPage
+export default LoginPage;

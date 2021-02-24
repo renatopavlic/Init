@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { UserProvider } from "./context/UserContext";
+import Nav from "./components/Nav/Nav";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import Nav from "./components/Nav/Nav";
-import { UserProvider } from "./context/UserContext";
-import { UserContext } from "./context/UserContext";
 
 function App() {
 

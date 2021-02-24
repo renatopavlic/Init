@@ -25,7 +25,14 @@
   padding: 5px 15px;
 }
 
-.loginForm > form > button {
+#loginForm__errorMsg {
+  color: red;
+  font-weight: 900;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.loginForm__button {
   padding: 16px 20px;
   font-size: 1rem;
   font-weight: 600;
@@ -36,4 +43,10 @@
   cursor: pointer;
   margin-top: 20px;
   text-transform: uppercase;
+  transition: 0.6s ease;
+}
+
+.loginForm__button:hover {
+  transition: 0.6s ease;
+  background-color: #b30c00;
 }

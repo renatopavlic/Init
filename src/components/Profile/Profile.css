@@ -30,6 +30,12 @@
   cursor: pointer;
   margin-top: 20px;
   text-transform: uppercase;
+  transition: 0.6s ease;
+}
+
+.profile > button:hover {
+  transition: 0.6s ease;
+  background-color: #b30c00;
 }
 
 .profile__name {
